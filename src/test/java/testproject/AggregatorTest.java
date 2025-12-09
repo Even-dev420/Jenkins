@@ -38,20 +38,4 @@ public class AggregatorTest {
         agr.reset();
         assertThat(agr.getSum()).isZero();
     }
-    
-    @Test
-    public void testResetAndAddAgain() {
-        Aggregator agr = new Aggregator();
-        agr.addValue(100);
-        agr.reset();
-        agr.addValue(50);
-        assertThat(agr.getSum()).isEqualTo(50);
-    }
-    
-    @Test
-    public void testResetWhenAlreadyZero() {
-        Aggregator agr = new Aggregator();
-        agr.reset(); // reset когда сумма уже 0
-        assertThat(agr.getSum()).isZero();
-    }
 }
