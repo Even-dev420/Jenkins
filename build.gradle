@@ -34,8 +34,27 @@ jacocoTestReport {
     dependsOn test
     reports {
         xml.required = true
-        html.required = false
+        html.required = true
         csv.required = false
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, excludes: [
+                '**/*Test*',      // исключаем тестовые классы
+                '**/*Tests*',     // исключаем тестовые классы
+                '**/test/**'      // исключаем весь тестовый код
+            ])
+        }))
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.5
+            }
+        }
     }
 }
 
